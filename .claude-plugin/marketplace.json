@@ -1,0 +1,25 @@
+{
+  "name": "html-anime",
+  "owner": {
+    "name": "gaaameix-dev",
+    "url": "https://github.com/gaaameix-dev"
+  },
+  "metadata": {
+    "description": "Draw anime in HTML — shot sheets, cels, timing, camera and render, for Claude Code.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "html-anime",
+      "source": ".",
+      "description": "Prompt an anime. Claude draws it in HTML, timed for HyperFrames. Five skills: direct, cel, timing, camera, render.",
+      "version": "0.1.0",
+      "category": "creative",
+      "keywords": ["anime", "animation", "html", "hyperframes", "film"],
+      "author": {
+        "name": "gaaameix-dev",
+        "url": "https://github.com/gaaameix-dev"
+      }
+    }
+  ]
+}
