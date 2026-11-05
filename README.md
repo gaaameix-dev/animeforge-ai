@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <sub>A still from <i>Kokuyō</i>, drawn entirely in HTML. <a href="https://gaaameix-dev.github.io/html-anime/">Watch it on the site</a> · <a href="media/film.mp4">media/film.mp4</a></sub>
+  <sub>A still from <i>Kokuyō</i>, drawn entirely in HTML. <a href="https://gaaameix-dev.github.io/html-anime/">Watch it on the site</a> · <a href="https://github.com/gaaameix-dev/html-anime/releases/download/v0.1.0/film.mp4">film.mp4</a></sub>
 </p>
 
 An anime, written as HTML. You write a scene. [The site](https://gaaameix-dev.github.io/html-anime/) turns it into a shot sheet: holds, one expensive shot, a closed color script. Paste that sheet into Claude, Codex, Cursor, or Grok. The agent draws the frames.
@@ -27,7 +27,9 @@ The pictures are HTML, timed for [HyperFrames](https://github.com/heygen-com/hyp
 
 ## The film
 
-Kokuyō. Watch it on [the site](https://gaaameix-dev.github.io/html-anime/) or open [media/film.mp4](media/film.mp4).
+Kokuyō. Watch it on [the site](https://gaaameix-dev.github.io/html-anime/) or open [film.mp4](https://github.com/gaaameix-dev/html-anime/releases/download/v0.1.0/film.mp4).
+
+The film is 36 MB, so it ships as a [release asset](https://github.com/gaaameix-dev/html-anime/releases/download/v0.1.0/film.mp4) instead of in git. Download it into `media/` if you want the local page to play it.
 
 <table>
   <tr>
