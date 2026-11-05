@@ -1,0 +1,14 @@
+{
+  "name": "html-anime",
+  "version": "0.1.0",
+  "description": "Prompt an anime. Your coding agent draws it in HTML, timed for HyperFrames.",
+  "author": {
+    "name": "gaaameix-dev",
+    "url": "https://github.com/gaaameix-dev"
+  },
+  "homepage": "https://gaaameix-dev.github.io/html-anime/",
+  "repository": "https://github.com/gaaameix-dev/html-anime",
+  "license": "MIT",
+  "keywords": ["anime", "animation", "html", "hyperframes", "film", "sakuga", "video"],
+  "skills": "./skills/"
+}
