@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "html-anime",
-      "source": ".",
+      "source": "./",
       "description": "Prompt an anime. Claude draws it in HTML, timed for HyperFrames. Five skills: direct, cel, timing, camera, render.",
       "version": "0.1.0",
       "category": "creative",
