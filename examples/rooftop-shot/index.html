@@ -65,7 +65,19 @@
     <filter id="bloom" x="-40%" y="-40%" width="180%" height="180%">
       <feGaussianBlur stdDeviation="26"/>
     </filter>
+    <clipPath id="faceClip2"><path d="M636,466 C628,360 700,262 812,258 C926,254 998,352 990,466 C986,556 946,640 880,686 C846,712 800,716 764,700 C700,668 648,580 636,466 Z"/></clipPath>
     <clipPath id="coatClip"><path d="M470,1080 C486,900 600,822 720,800 L742,760 L900,760 L922,802 C1060,824 1170,904 1186,1080 Z"/></clipPath>
+    <linearGradient id="faceShade" x1="1" y1=".1" x2="0" y2=".9">
+      <stop offset="0" stop-color="#0a0814" stop-opacity="0"/>
+      <stop offset=".22" stop-color="#0a0814" stop-opacity=".1"/>
+      <stop offset=".55" stop-color="#0a0814" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#080610" stop-opacity=".58"/>
+    </linearGradient>
+    <linearGradient id="coatShade" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0814" stop-opacity=".05"/>
+      <stop offset=".5" stop-color="#0a0814" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#06040c" stop-opacity=".62"/>
+    </linearGradient>
     <clipPath id="faceClip"><path d="M632,470 C620,352 700,258 812,254 C930,250 1000,344 992,468 C986,560 940,650 862,700 C800,738 726,712 686,660 C650,612 640,540 632,470 Z"/></clipPath>
   </defs>
 
@@ -73,9 +85,19 @@
   <rect width="1920" height="1080" fill="url(#sky)"/>
 
   <!-- moon + glow -->
-  <circle cx="1452" cy="300" r="420" fill="url(#moonGlow)"/>
-  <circle cx="1452" cy="300" r="188" fill="url(#moonCore)"/>
-  <circle cx="1452" cy="300" r="188" fill="#e8434b" opacity=".55" filter="url(#bloom)"/>
+  <circle cx="812" cy="352" r="620" fill="url(#moonGlow)" opacity=".9"/>
+  <circle cx="812" cy="352" r="340" fill="url(#moonCore)"/>
+  <circle cx="812" cy="352" r="340" fill="#e8434b" opacity=".45" filter="url(#bloom)"/>
+  <g fill="#7d1230" opacity=".3" filter="url(#soft)">
+    <ellipse cx="700" cy="250" rx="70" ry="44"/>
+    <ellipse cx="880" cy="196" rx="52" ry="32"/>
+    <ellipse cx="960" cy="330" rx="60" ry="38"/>
+    <ellipse cx="760" cy="450" rx="76" ry="46"/>
+    <ellipse cx="640" cy="380" rx="44" ry="28"/>
+  </g>
+  <g fill="#ff9b78" opacity=".16" filter="url(#soft)">
+    <ellipse cx="840" cy="270" rx="90" ry="56"/>
+  </g>
 
   <!-- ===== far city, blurred ===== -->
   <g filter="url(#farBlur)" opacity=".55">
@@ -114,6 +136,9 @@
   </g>
   <path d="M470,1080 C486,900 600,822 720,800" stroke="#8fa6d8" stroke-width="3" fill="none"
     opacity=".22" stroke-linecap="round"/>
+  <path d="M924,800 C1040,824 1140,896 1164,1040" stroke="#ffd9b8" stroke-width="4" fill="none"
+    opacity=".3" filter="url(#soft2)"/>
+  <path d="M928,802 C1036,826 1130,894 1152,1024" stroke="#fff0dd" stroke-width="1.8" fill="none" opacity=".4"/>
   <!-- collar rim light (cool, from the left) -->
   <path d="M470,1080 C486,900 600,822 720,800 L726,824 C620,850 516,918 500,1080 Z" fill="#6f7fc0" opacity=".18"/>
 
@@ -251,12 +276,31 @@
     </g>
   </g>
 
+  <!-- ===== backlit: key behind, camera side in shadow ===== -->
+  <g id="bl">
+  <path d="M632,470 C620,352 700,258 812,254 C930,250 1000,344 992,468 C986,560 940,650 862,700 C800,738 726,712 686,660 C650,612 640,540 632,470 Z" fill="url(#faceShade)"/>
+  <path d="M470,1080 C486,898 596,820 718,798 L742,754 L902,754 L926,798 C1060,820 1172,900 1188,1080 Z"
+    fill="url(#coatShade)"/>
+  <path d="M926,798 C1060,820 1172,900 1188,1080" stroke="#8f7fd0" stroke-width="2.5" fill="none" opacity=".3"/>
+  <path d="M772,686 C778,738 770,776 752,800 L902,800 C886,776 878,738 884,686 Z" fill="#0a0814" opacity=".5"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M1016,458 C1016,486 1010,512 1000,534 C994,470 972,404 930,368"
+      stroke="#ffd2a8" stroke-width="6" opacity=".45" filter="url(#soft2)"/>
+    <path d="M1016,458 C1016,486 1010,512 1000,534" stroke="#fff2e0" stroke-width="2.4" opacity=".7"/>
+    <path d="M994,470 C1004,562 998,652 976,732 C964,774 950,800 938,814"
+      stroke="#ffe3c4" stroke-width="5" opacity=".4" filter="url(#soft2)"/>
+    <path d="M996,486 C1004,570 998,650 978,726" stroke="#ffe9d2" stroke-width="2" opacity=".55"/>
+    <path d="M990,470 C984,556 946,642 872,688" stroke="#ffd9b8" stroke-width="3.4" opacity=".5" filter="url(#soft2)"/>
+    <path d="M988,486 C982,560 948,638 878,682" stroke="#fff4e6" stroke-width="1.6" opacity=".55"/>
+  </g>
+
+  </g>
   <!-- ===== ink pass: outlines and interior line work ===== -->
   <g id="ink" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <!-- jaw and chin, traced on the actual silhouette -->
     <path d="M992,468 C986,560 940,650 862,700 C800,738 726,712 686,660 C650,612 640,540 632,470"
-      stroke="#7d4753" stroke-width="3" opacity=".85"/>
-    <path d="M862,700 C800,738 726,712 686,660" stroke="#6d3c4a" stroke-width="4" opacity=".9"/>
+      stroke="#6b3945" stroke-width="4.4" opacity=".95"/>
+    <path d="M862,700 C800,738 726,712 686,660" stroke="#5c313e" stroke-width="5.4" opacity=".95"/>
 
     <!-- neck edges, short -->
     <g stroke="#8a5560" stroke-width="2.2" opacity=".7">
@@ -265,18 +309,30 @@
     </g>
 
     <!-- hair meeting skin: bang tips only -->
-    <g stroke="#0b0914" stroke-width="3" opacity=".95">
+    <g stroke="#08060f" stroke-width="4.2" opacity=".95">
       <path d="M716,470 C722,452 728,432 742,392"/>
       <path d="M764,470 C776,452 788,430 800,404"/>
       <path d="M912,532 C918,516 924,502 932,478"/>
+      <path d="M646,470 C640,556 646,632 668,706"/>
+      <path d="M996,470 C1006,560 1000,650 978,730"/>
     </g>
     <!-- clump separation inside the hair -->
-    <g stroke="#2b2449" stroke-width="2" opacity=".7">
+    <g stroke="#2b2449" stroke-width="2.4" opacity=".8">
       <path d="M636,392 C660,300 730,250 812,246"/>
       <path d="M812,246 C872,252 930,290 958,352"/>
       <path d="M742,392 C756,326 784,272 812,246"/>
       <path d="M856,378 C890,398 916,432 932,478"/>
       <path d="M660,300 C700,282 760,268 812,262"/>
+      <path d="M700,352 C716,330 736,312 758,300"/>
+      <path d="M846,336 C872,350 892,372 904,396"/>
+      <path d="M660,420 C670,392 684,368 702,350"/>
+      <path d="M928,380 C940,412 946,444 946,472"/>
+    </g>
+    <g stroke="#3a3160" stroke-width="1.6" opacity=".55">
+      <path d="M676,362 C700,330 730,306 762,292"/>
+      <path d="M818,290 C852,296 884,314 906,340"/>
+      <path d="M628,470 C622,540 628,610 644,674"/>
+      <path d="M1012,470 C1020,540 1014,610 998,668"/>
     </g>
 
     <!-- brows -->
@@ -286,14 +342,20 @@
     </g>
 
     <!-- eyes: lash flicks and lower lid -->
-    <g stroke="#120d1c" stroke-width="3" opacity=".9">
-      <path d="M776,468 C790,462 800,466 806,476"/>
-      <path d="M960,462 C972,458 982,462 986,472"/>
+    <g stroke="#0d0914" stroke-width="3.8" opacity=".95">
+      <path d="M776,468 C792,461 804,466 810,478"/>
+      <path d="M960,462 C974,457 984,462 989,474"/>
     </g>
-    <g stroke="#8a5560" stroke-width="1.8" opacity=".65">
+    <g stroke="#8a5560" stroke-width="2.2" opacity=".8">
       <path d="M642,498 C672,514 738,512 766,492"/>
       <path d="M846,496 C874,510 928,508 954,490"/>
     </g>
+    <g stroke="#ffe6c9" stroke-width="2" opacity=".3">
+      <path d="M676,504 C700,510 726,510 746,502"/>
+    </g>
+
+    <!-- nostril -->
+    <path d="M792,632 C800,637 810,637 817,632" stroke="#a9646b" stroke-width="2.2" opacity=".55"/>
 
     <!-- mouth seam -->
     <path d="M758,660 C782,650 812,650 834,660" stroke="#5d2b3c" stroke-width="2.6" opacity=".9"/>
@@ -312,7 +374,7 @@
 
   <!-- ===== atmosphere in front ===== -->
   <!-- rain -->
-  <g stroke="#cfd8ff" stroke-linecap="round" opacity=".5">
+  <g stroke="#dfe6ff" stroke-linecap="round" opacity=".62">
     <g stroke-width="2">
       <path d="M120,120 l-16,74"/><path d="M300,60 l-16,74"/><path d="M520,140 l-16,74"/>
       <path d="M1180,90 l-16,74"/><path d="M1400,150 l-16,74"/><path d="M1700,70 l-16,74"/>

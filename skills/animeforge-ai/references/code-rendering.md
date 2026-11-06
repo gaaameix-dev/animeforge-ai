@@ -76,6 +76,10 @@ Colour rules that stop it looking plastic:
 .bounce{ mix-blend-mode:overlay; opacity:.18; }
 ```
 
+**The layering rule that bites everyone.** A shade pass must reuse the *exact* `d` string of the
+shape it shades. Retype it — even by 4px — and a sliver of unshaded base colour survives along the
+edge. It reads as a rim light that nobody asked for, and it survives every other fix you try.
+
 ---
 
 ## 3. Face and eyes — where realism is won or lost
@@ -195,5 +199,7 @@ const FRAME = 1 / 24;
 6. **Full-screen test**: at 100% on a 1080p frame, no line should be under 1px, no
    gradient should band, and no edge should alias into a stair-step.
 7. **Determinism**: render twice from the same seed. The files should be identical.
+8. **Sliver check**: zoom to 200% along every silhouette. Any 1–2px line of base colour that is
+   brighter than both sides is a shade pass whose path drifted from the shape it shades.
 
 Report what passed. If a check fails and you shipped anyway, say which one and why.
