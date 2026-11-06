@@ -112,6 +112,8 @@
     <path d="M700,880 C682,946 672,1014 670,1080 L706,1080 C708,1010 718,944 730,886 Z"
       fill="#3a3260" opacity=".35" filter="url(#soft)"/>
   </g>
+  <path d="M470,1080 C486,900 600,822 720,800" stroke="#8fa6d8" stroke-width="3" fill="none"
+    opacity=".22" stroke-linecap="round"/>
   <!-- collar rim light (cool, from the left) -->
   <path d="M470,1080 C486,900 600,822 720,800 L726,824 C620,850 516,918 500,1080 Z" fill="#6f7fc0" opacity=".18"/>
 
@@ -202,13 +204,19 @@
   </g>
 
   <!-- nose: shadow only -->
-  <path d="M796,566 C804,588 806,606 800,618 L812,622 C820,604 816,580 806,562 Z" fill="#b56f70" opacity=".5" filter="url(#soft2)"/>
-  <ellipse cx="802" cy="612" rx="12" ry="6" fill="#ffd9b8" opacity=".3" filter="url(#soft2)"/>
+  <!-- nose: bridge light, tip shadow, nostril hint -->
+  <path d="M786,536 C794,566 796,594 792,614" stroke="#ffe6d0" stroke-width="7" fill="none"
+    opacity=".28" filter="url(#soft2)" stroke-linecap="round"/>
+  <path d="M800,586 C812,604 816,620 810,634 L822,636 C830,616 824,590 812,570 Z"
+    fill="#b56f70" opacity=".42" filter="url(#soft2)"/>
+  <path d="M792,630 C802,636 814,636 822,630" stroke="#a9646b" stroke-width="2.4" fill="none" opacity=".45"/>
 
   <!-- mouth -->
   <path d="M756,660 C780,650 812,650 836,660 C812,676 780,676 756,660 Z" fill="#8f4552"/>
   <path d="M762,661 C782,654 810,654 830,661 C808,668 784,668 762,661 Z" fill="#5d2b3c" opacity=".85"/>
   <path d="M760,676 C784,684 812,684 832,674 L832,680 C810,690 782,690 760,682 Z" fill="#ffd9b8" opacity=".45" filter="url(#soft2)"/>
+  <path d="M762,658 C776,652 786,656 796,660 C806,656 818,652 830,658" stroke="#6d3346"
+    stroke-width="2" fill="none" opacity=".7" stroke-linecap="round"/>
 
   <!-- ===== hair in front: clumps ===== -->
   <g>
@@ -243,7 +251,64 @@
     </g>
   </g>
 
+  <!-- ===== ink pass: outlines and interior line work ===== -->
+  <g id="ink" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- jaw and chin, traced on the actual silhouette -->
+    <path d="M992,468 C986,560 940,650 862,700 C800,738 726,712 686,660 C650,612 640,540 632,470"
+      stroke="#7d4753" stroke-width="3" opacity=".85"/>
+    <path d="M862,700 C800,738 726,712 686,660" stroke="#6d3c4a" stroke-width="4" opacity=".9"/>
+
+    <!-- neck edges, short -->
+    <g stroke="#8a5560" stroke-width="2.2" opacity=".7">
+      <path d="M762,706 C766,748 760,776 746,796"/>
+      <path d="M886,706 C882,748 890,776 908,796"/>
+    </g>
+
+    <!-- hair meeting skin: bang tips only -->
+    <g stroke="#0b0914" stroke-width="3" opacity=".95">
+      <path d="M716,470 C722,452 728,432 742,392"/>
+      <path d="M764,470 C776,452 788,430 800,404"/>
+      <path d="M912,532 C918,516 924,502 932,478"/>
+    </g>
+    <!-- clump separation inside the hair -->
+    <g stroke="#2b2449" stroke-width="2" opacity=".7">
+      <path d="M636,392 C660,300 730,250 812,246"/>
+      <path d="M812,246 C872,252 930,290 958,352"/>
+      <path d="M742,392 C756,326 784,272 812,246"/>
+      <path d="M856,378 C890,398 916,432 932,478"/>
+      <path d="M660,300 C700,282 760,268 812,262"/>
+    </g>
+
+    <!-- brows -->
+    <g stroke="#191126" stroke-width="2.2" opacity=".8">
+      <path d="M640,442 C672,420 724,418 752,432"/>
+      <path d="M846,428 C876,414 920,418 942,436"/>
+    </g>
+
+    <!-- eyes: lash flicks and lower lid -->
+    <g stroke="#120d1c" stroke-width="3" opacity=".9">
+      <path d="M776,468 C790,462 800,466 806,476"/>
+      <path d="M960,462 C972,458 982,462 986,472"/>
+    </g>
+    <g stroke="#8a5560" stroke-width="1.8" opacity=".65">
+      <path d="M642,498 C672,514 738,512 766,492"/>
+      <path d="M846,496 C874,510 928,508 954,490"/>
+    </g>
+
+    <!-- mouth seam -->
+    <path d="M758,660 C782,650 812,650 834,660" stroke="#5d2b3c" stroke-width="2.6" opacity=".9"/>
+    <path d="M764,678 C786,684 810,684 828,676" stroke="#b8747e" stroke-width="1.6" opacity=".45"/>
+
+    <!-- coat: collar seam and lapels only, no edges across the body -->
+    <g stroke="#4a4076" opacity=".5">
+      <path d="M742,760 L720,800 C704,840 694,890 690,948" stroke-width="2"/>
+      <path d="M900,760 L922,802 C938,840 948,890 952,948" stroke-width="2"/>
+      <path d="M766,806 C812,824 858,824 898,808" stroke-width="1.8" opacity=".55"/>
+    </g>
   </g>
+
+  </g>
+
 
   <!-- ===== atmosphere in front ===== -->
   <!-- rain -->
