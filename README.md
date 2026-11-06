@@ -47,6 +47,7 @@ Claude.ai / other hosts: drop `skills/animeforge-ai/` into your skills folder, o
 | J — Edit | Edit decision list, titles, subtitles, grade, export settings |
 | K — QA | Continuity, pacing, lip-sync, rights, aspect ratio — as a severity list |
 | L — Code frames | Frames drawn by writing code: construction, cel shading, line, light rig, lens, motion, determinism |
+| M — Painted frames | Code plans the shot, an image tool paints it, code assembles — for painted key-visual quality |
 
 Fourteen modes come with it: Idea, Story, Script, Character, Storyboard, 2D Anime, 3D Anime, Action, Voice & Audio, Trailer, Episode, **Code**, Production, Revision.
 
@@ -74,6 +75,17 @@ Two worked examples of that stage are in the repo:
 - [`examples/street-night/`](examples/street-night/index.html) — a lantern-lit alley in perspective, 4,400 nodes: converging facades, tiled eaves, lit windows, neon, stalls, overhead strings, wet street.
 
 Open either file in a browser and it is the frame; no image model anywhere in it.
+
+## Two ways to make a frame, and which one to promise
+
+**Stage L, code-drawn.** You write the frame. Full control, deterministic, no model needed. The
+ceiling is clean cel-shaded vector art — see `examples/`. It will not look painted.
+
+**Stage M, hybrid.** Code plans the blocking, camera, palette and light; a connected image tool
+paints each shot; code times and assembles. This is the only route to painted key-visual
+quality. It needs a tool, and the skill says so plainly rather than faking it.
+
+See [`skills/animeforge-ai/references/hybrid-painted-frames.md`](skills/animeforge-ai/references/hybrid-painted-frames.md).
 
 ## Layout
 
