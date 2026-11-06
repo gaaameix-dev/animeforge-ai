@@ -227,6 +227,26 @@ What all three actually do:
 - **Bloom on the top 1% of brightness, grain on everything, vignette at the edges.** Those
   three passes are most of the "expensive" feeling.
 
+### The detail budget
+
+Detail in these frames is a number, not a mood. A single 1920×1080 frame in the reference
+class carries roughly **5,000–15,000 drawn shapes**: window rectangles, tile ticks, lantern
+circles, reflection streaks, hair strands, sparks. Under about 1,500 shapes a frame reads as
+a diagram, no matter how good the palette is.
+
+So count nodes before you call a frame detailed:
+
+```bash
+grep -o "<rect\|<circle\|<path\|<line" frame.svg | wc -l
+```
+
+- under 1,500 — flat, reads as vector art
+- 3,000–6,000 — reads as a finished background
+- 8,000+ — the density people mean when they say "so much detail"
+
+Get there with loops, not with typing: every window, tile and lantern in those frames is the
+same shape repeated on a grid with jitter.
+
 ### What code reproduces well
 
 | Move | How |
