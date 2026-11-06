@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>AnimeForge AI — demo shot</title>
+<style>
+  html,body{margin:0;background:#07070d}
+  .frame{position:relative;width:1920px;height:1080px;overflow:hidden}
+  svg{display:block}
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.055;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>")}
+  .vig{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(120% 90% at 55% 45%, transparent 42%, rgba(4,4,10,.72) 100%)}
+</style>
+</head>
+<body>
+<div class="frame">
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#08070f"/>
+      <stop offset=".55" stop-color="#141029"/>
+      <stop offset="1" stop-color="#2a1a35"/>
+    </linearGradient>
+    <radialGradient id="moonCore" cx=".42" cy=".38" r=".7">
+      <stop offset="0" stop-color="#ff8f6a"/>
+      <stop offset=".45" stop-color="#e8434b"/>
+      <stop offset="1" stop-color="#8d1230"/>
+    </radialGradient>
+    <radialGradient id="moonGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#e8434b" stop-opacity=".55"/>
+      <stop offset=".5" stop-color="#a01f45" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#a01f45" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="skin" x1=".2" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8ae9c"/>
+      <stop offset=".5" stop-color="#f0c2ae"/>
+      <stop offset="1" stop-color="#e7ad99"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2=".7" y2="1">
+      <stop offset="0" stop-color="#241d3a"/>
+      <stop offset=".55" stop-color="#161327"/>
+      <stop offset="1" stop-color="#0b0a14"/>
+    </linearGradient>
+    <linearGradient id="coat" x1=".1" y1="0" x2=".9" y2="1">
+      <stop offset="0" stop-color="#2a2445"/>
+      <stop offset=".55" stop-color="#1a1730"/>
+      <stop offset="1" stop-color="#0d0b18"/>
+    </linearGradient>
+    <linearGradient id="iris" x1=".5" y1="0" x2=".5" y2="1">
+      <stop offset="0" stop-color="#5d1230"/>
+      <stop offset=".45" stop-color="#c0283f"/>
+      <stop offset=".78" stop-color="#ffb27a"/>
+      <stop offset="1" stop-color="#ffe6c2"/>
+    </linearGradient>
+    <linearGradient id="rimWarm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffd9b8" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ffd9b8" stop-opacity=".95"/>
+    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="soft4"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="soft2"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="farBlur"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="midBlur"><feGaussianBlur stdDeviation="2.5"/></filter>
+    <filter id="bloom" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+    <clipPath id="coatClip"><path d="M470,1080 C486,900 600,822 720,800 L742,760 L900,760 L922,802 C1060,824 1170,904 1186,1080 Z"/></clipPath>
+    <clipPath id="faceClip"><path d="M632,470 C620,352 700,258 812,254 C930,250 1000,344 992,468 C986,560 940,650 862,700 C800,738 726,712 686,660 C650,612 640,540 632,470 Z"/></clipPath>
+  </defs>
+
+  <!-- ===== far: sky ===== -->
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+
+  <!-- moon + glow -->
+  <circle cx="1452" cy="300" r="420" fill="url(#moonGlow)"/>
+  <circle cx="1452" cy="300" r="188" fill="url(#moonCore)"/>
+  <circle cx="1452" cy="300" r="188" fill="#e8434b" opacity=".55" filter="url(#bloom)"/>
+
+  <!-- ===== far city, blurred ===== -->
+  <g filter="url(#farBlur)" opacity=".55">
+    <path fill="#0e0b1c" d="M0,760 L0,660 L90,660 L90,620 L170,620 L170,690 L250,690 L250,600 L330,600 L330,700 L420,700 L420,640 L520,640 L520,700 L610,700 L610,650 L700,650 L700,720 L1920,720 L1920,1080 L0,1080 Z"/>
+  </g>
+  <g filter="url(#midBlur)" opacity=".8">
+    <path fill="#0a0814" d="M0,860 L0,780 L120,780 L120,740 L230,740 L230,800 L340,800 L340,760 L470,760 L470,820 L560,820 L560,790 L660,790 L660,840 L1920,840 L1920,1080 L0,1080 Z"/>
+  </g>
+  <!-- windows -->
+  <g fill="#f0c36a" opacity=".5">
+    <rect x="150" y="800" width="9" height="14"/><rect x="176" y="800" width="9" height="14"/>
+    <rect x="256" y="770" width="9" height="12"/><rect x="386" y="792" width="9" height="12"/>
+    <rect x="1240" y="790" width="10" height="14"/><rect x="1300" y="812" width="10" height="14"/>
+    <rect x="1600" y="778" width="10" height="14"/><rect x="1700" y="806" width="10" height="14"/>
+  </g>
+  <!-- bokeh -->
+  <g opacity=".5">
+    <circle cx="220" cy="330" r="26" fill="#e8434b" opacity=".35" filter="url(#soft)"/>
+    <circle cx="430" cy="210" r="14" fill="#7b6cff" opacity=".45" filter="url(#soft)"/>
+    <circle cx="1660" cy="560" r="30" fill="#f0c36a" opacity=".22" filter="url(#soft)"/>
+    <circle cx="1180" cy="180" r="18" fill="#8fa6d8" opacity=".3" filter="url(#soft)"/>
+    <circle cx="1760" cy="240" r="12" fill="#ffd9b8" opacity=".3" filter="url(#soft)"/>
+  </g>
+
+  <!-- ===== character ===== -->
+  <g transform="translate(812,510) scale(1.38) translate(-812,-470)">
+  <!-- coat / shoulders -->
+  <path d="M470,1080 C486,900 600,822 720,800 L742,760 L900,760 L922,802 C1060,824 1170,904 1186,1080 Z" fill="url(#coat)"/>
+  <path d="M470,1080 C486,900 600,822 720,800 L742,760 L760,880 C700,940 660,1010 652,1080 Z" fill="#0b0916" opacity=".85"/>
+  <!-- one soft fold, clipped to the coat; nothing else floats over the frame -->
+  <g clip-path="url(#coatClip)">
+    <path d="M900,860 C934,938 952,1014 956,1080 L1010,1080 C1000,992 972,912 940,864 Z"
+      fill="#0a0814" opacity=".55" filter="url(#soft)"/>
+    <path d="M700,880 C682,946 672,1014 670,1080 L706,1080 C708,1010 718,944 730,886 Z"
+      fill="#3a3260" opacity=".35" filter="url(#soft)"/>
+  </g>
+  <!-- collar rim light (cool, from the left) -->
+  <path d="M470,1080 C486,900 600,822 720,800 L726,824 C620,850 516,918 500,1080 Z" fill="#6f7fc0" opacity=".18"/>
+
+  <!-- neck -->
+  <path d="M760,690 C766,742 760,776 742,800 L912,800 C892,776 884,742 888,690 Z" fill="#d99f8d"/>
+  <path d="M760,690 C766,742 760,776 742,800 L800,800 C786,762 782,724 786,690 Z" fill="#b8767a" opacity=".55"/>
+
+  <!-- hair mass behind head -->
+  <path d="M600,520 C580,360 660,236 812,232 C960,228 1030,340 1022,470 C1016,556 1040,600 1082,660 C1104,692 1096,720 1058,724 C1030,690 1004,650 992,610 C980,700 960,760 930,800 L860,800 C890,740 900,672 896,600 L700,600 C690,676 700,744 726,800 L660,800 C640,748 620,700 610,640 C596,600 602,560 600,520 Z" fill="url(#hair)"/>
+
+  <!-- face base -->
+  <path d="M632,470 C620,352 700,258 812,254 C930,250 1000,344 992,468 C986,560 940,650 862,700 C800,738 726,712 686,660 C650,612 640,540 632,470 Z" fill="url(#skin)"/>
+
+  <!-- ===== shading inside the face ===== -->
+  <g clip-path="url(#faceClip)">
+    <!-- ambient occlusion: hairline + jaw + eye sockets -->
+    <g fill="#a9646b" opacity=".55" filter="url(#soft4)">
+      <path d="M600,300 C700,250 940,250 1030,320 L1030,380 C940,320 700,320 600,380 Z"/>
+      <path d="M660,640 C720,720 860,740 930,660 L950,720 C860,790 700,770 640,700 Z"/>
+      <ellipse cx="700" cy="486" rx="86" ry="46"/>
+      <ellipse cx="892" cy="482" rx="80" ry="44"/>
+      <ellipse cx="800" cy="604" rx="54" ry="34" opacity=".5"/>
+    </g>
+    <!-- core shadow: the far side of the form, softened so it wraps instead of banding -->
+    <path d="M892,250 C978,296 1004,398 996,472 C988,570 938,656 858,704 C906,676 940,600 946,512 C952,414 936,306 892,250 Z"
+      fill="#c98b86" opacity=".7" filter="url(#soft4)"/>
+    <path d="M948,300 C1000,364 1006,456 994,514 C986,580 956,642 906,692 C948,642 968,572 972,502 C976,424 966,354 948,300 Z"
+      fill="#b56f70" opacity=".4" filter="url(#soft)"/>
+    <!-- temple + cheekbone planes, so the turn of the form reads -->
+    <path d="M960,420 C984,470 980,540 956,596 C978,540 980,470 960,420 Z" fill="#a9646b" opacity=".3" filter="url(#soft2)"/>
+    <!-- chin shadow onto the jaw -->
+    <path d="M700,676 C760,730 880,724 936,660 L946,700 C884,760 748,764 690,706 Z" fill="#a9646b" opacity=".45" filter="url(#soft4)"/>
+    <!-- cheek flush -->
+    <ellipse cx="712" cy="596" rx="72" ry="40" fill="#e08a86" opacity=".3" filter="url(#soft)"/>
+    <ellipse cx="884" cy="592" rx="62" ry="36" fill="#e08a86" opacity=".22" filter="url(#soft)"/>
+    <!-- warm bounce from below (practical light) -->
+    <path d="M660,700 C740,760 900,750 980,672 L980,760 L660,760 Z" fill="#ffb27a" opacity=".14" filter="url(#soft)"/>
+    <!-- rim: key from behind-right, warm -->
+    <path d="M930,262 C1006,320 1022,420 1012,486 C1002,588 952,668 872,712 L900,760 L1010,760 L1010,240 Z"
+      fill="url(#rimWarm)" opacity=".9" filter="url(#soft2)"/>
+  </g>
+
+  <!-- ===== features ===== -->
+  <!-- brows -->
+  <path d="M636,436 C670,414 726,412 756,428 L752,442 C722,428 674,430 642,452 Z" fill="#241d3a"/>
+  <path d="M836,424 C868,408 918,412 946,432 L940,448 C914,430 872,428 842,442 Z" fill="#241d3a"/>
+
+  <!-- eyes: near (left) -->
+  <g>
+    <path d="M632,488 C662,462 742,458 778,482 C748,512 676,514 632,488 Z" fill="#f6f3ee"/>
+    <g>
+      <clipPath id="eyeL"><path d="M632,488 C662,462 742,458 778,482 C748,512 676,514 632,488 Z"/></clipPath>
+      <g clip-path="url(#eyeL)">
+        <circle cx="702" cy="488" r="30" fill="url(#iris)"/>
+        <circle cx="702" cy="488" r="30" fill="none" stroke="#3d0d20" stroke-width="3.5" opacity=".85"/>
+        <circle cx="702" cy="488" r="12" fill="#2a0a14"/>
+        <path d="M672,472 C690,462 716,462 732,474 L732,492 C716,482 690,482 672,490 Z" fill="#5d1230" opacity=".45"/>
+        <path d="M636,470 C670,448 740,446 780,474 L780,486 C740,462 670,464 636,486 Z" fill="#3a1f2e" opacity=".55" filter="url(#soft2)"/>
+        <circle cx="692" cy="478" r="10" fill="#fff8f2"/>
+        <circle cx="718" cy="504" r="5" fill="#ffe6c2" opacity=".9"/>
+      </g>
+    </g>
+    <!-- upper lash, thick at the outer corner -->
+    <path d="M624,492 C656,448 744,438 786,470 C790,482 784,490 774,484 C740,458 668,464 638,500 C630,506 622,500 624,492 Z" fill="#171020"/>
+    <path d="M624,492 C656,448 744,438 786,470 C776,466 700,452 660,470 C640,478 630,486 624,492 Z" fill="#0d0916" opacity=".7"/>
+    <!-- eyelid crease -->
+    <path d="M646,452 C676,432 730,430 762,448" stroke="#a9646b" stroke-width="4" fill="none" opacity=".55" stroke-linecap="round"/>
+    <!-- lower lid catch -->
+    <path d="M640,498 C672,516 740,514 768,492 L770,498 C740,524 672,526 640,504 Z" fill="#a9646b" opacity=".8"/>
+  </g>
+
+  <!-- eyes: far (right) -->
+  <g>
+    <path d="M838,484 C864,460 928,458 958,478 C932,506 870,508 838,484 Z" fill="#f6f3ee"/>
+    <g>
+      <clipPath id="eyeR"><path d="M838,484 C864,460 928,458 958,478 C932,506 870,508 838,484 Z"/></clipPath>
+      <g clip-path="url(#eyeR)">
+        <circle cx="898" cy="484" r="27" fill="url(#iris)"/>
+        <circle cx="898" cy="484" r="27" fill="none" stroke="#3d0d20" stroke-width="3.5" opacity=".85"/>
+        <circle cx="898" cy="484" r="11" fill="#2a0a14"/>
+        <path d="M872,470 C888,461 910,461 926,472 L926,488 C910,479 888,479 872,486 Z" fill="#5d1230" opacity=".45"/>
+        <path d="M832,466 C864,446 928,444 964,470 L964,480 C928,458 866,460 832,482 Z" fill="#3a1f2e" opacity=".6" filter="url(#soft2)"/>
+        <circle cx="886" cy="472" r="8" fill="#fff8f2"/>
+      </g>
+    </g>
+    <path d="M830,488 C858,450 934,444 970,466 C974,478 968,486 958,480 C930,458 866,464 844,494 C836,500 828,496 830,488 Z" fill="#171020"/>
+    <path d="M848,498 C876,514 932,512 956,490 L958,496 C934,522 872,524 846,504 Z" fill="#a9646b" opacity=".75"/>
+  </g>
+
+  <!-- nose: shadow only -->
+  <path d="M796,566 C804,588 806,606 800,618 L812,622 C820,604 816,580 806,562 Z" fill="#b56f70" opacity=".5" filter="url(#soft2)"/>
+  <ellipse cx="802" cy="612" rx="12" ry="6" fill="#ffd9b8" opacity=".3" filter="url(#soft2)"/>
+
+  <!-- mouth -->
+  <path d="M756,660 C780,650 812,650 836,660 C812,676 780,676 756,660 Z" fill="#8f4552"/>
+  <path d="M762,661 C782,654 810,654 830,661 C808,668 784,668 762,661 Z" fill="#5d2b3c" opacity=".85"/>
+  <path d="M760,676 C784,684 812,684 832,674 L832,680 C810,690 782,690 760,682 Z" fill="#ffd9b8" opacity=".45" filter="url(#soft2)"/>
+
+  <!-- ===== hair in front: clumps ===== -->
+  <g>
+    <path d="M604,470 C592,340 672,242 812,238 C944,234 1016,330 1016,458 C1016,486 1010,512 1000,534 C992,470 972,404 930,368 C900,344 860,336 812,338 C742,340 690,372 664,424 C644,464 638,516 640,566 C622,540 610,506 604,470 Z" fill="url(#hair)"/>
+    <!-- bangs: separate clumps, each with a pointed tip and its own shadow side -->
+    <path d="M636,392 C660,300 730,250 812,246 C790,286 762,330 742,392 C728,432 722,452 716,470 C700,432 668,414 636,392 Z" fill="#1f1a33"/>
+    <path d="M742,392 C756,326 784,272 812,246 C824,300 818,352 800,404 C788,430 776,452 764,470 C760,440 754,414 742,392 Z" fill="#161227"/>
+    <path d="M812,246 C872,252 930,290 958,352 C944,404 936,444 932,478 C916,432 890,398 856,378 C846,334 832,286 812,246 Z" fill="#221c38"/>
+    <path d="M856,378 C890,398 916,432 932,478 C924,502 918,516 912,532 C906,494 892,462 872,438 C868,418 862,396 856,378 Z" fill="#120f22"/>
+    <!-- strands falling over the forehead -->
+    <g stroke="#100d1f" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55">
+      <path d="M742,318 C756,360 764,398 766,430"/>
+      <path d="M872,332 C888,372 896,410 898,442"/>
+    </g>
+    <!-- side locks -->
+    <path d="M646,470 C640,556 646,632 668,706 C690,760 700,790 700,812 L660,812 C640,760 620,700 610,640 C600,580 606,520 618,470 Z" fill="#151228"/>
+    <path d="M996,470 C1006,560 1000,650 978,730 C966,772 952,800 940,812 L986,812 C1006,764 1024,700 1030,630 C1036,570 1030,516 1018,470 Z" fill="#100e20"/>
+    <!-- specular band -->
+    <g fill="#9a8cf0" opacity=".45" filter="url(#soft2)">
+      <path d="M694,318 C726,296 762,286 796,288 C768,300 738,312 714,330 Z"/>
+      <path d="M828,290 C862,290 896,302 918,324 C892,312 862,304 832,302 Z"/>
+      <path d="M642,430 C650,398 664,372 684,352 C672,384 662,412 658,444 Z"/>
+    </g>
+    <g fill="#d8cfff" opacity=".3">
+      <path d="M704,314 C732,298 760,292 786,292 C764,302 740,310 720,322 Z"/>
+    </g>
+    <!-- backlit strands on the rim side -->
+    <g stroke="#ffd9b8" stroke-width="2" fill="none" opacity=".55">
+      <path d="M1006,352 C1024,430 1020,520 1000,600"/>
+      <path d="M984,320 C1010,404 1014,500 998,580"/>
+      <path d="M1026,420 C1038,486 1030,560 1012,620"/>
+    </g>
+  </g>
+
+  </g>
+
+  <!-- ===== atmosphere in front ===== -->
+  <!-- rain -->
+  <g stroke="#cfd8ff" stroke-linecap="round" opacity=".5">
+    <g stroke-width="2">
+      <path d="M120,120 l-16,74"/><path d="M300,60 l-16,74"/><path d="M520,140 l-16,74"/>
+      <path d="M1180,90 l-16,74"/><path d="M1400,150 l-16,74"/><path d="M1700,70 l-16,74"/>
+      <path d="M180,520 l-16,74"/><path d="M1740,420 l-16,74"/><path d="M1080,640 l-16,74"/>
+    </g>
+    <g stroke-width="3" opacity=".7" filter="url(#soft2)">
+      <path d="M240,300 l-20,96"/><path d="M1520,260 l-20,96"/><path d="M980,860 l-20,96"/>
+    </g>
+    <g stroke-width="1.4" opacity=".45">
+      <path d="M80,700 l-14,64"/><path d="M420,860 l-14,64"/><path d="M1300,720 l-14,64"/>
+      <path d="M1620,880 l-14,64"/><path d="M900,60 l-14,64"/><path d="M760,120 l-14,64"/>
+    </g>
+  </g>
+  <!-- haze over the character (depth plane) -->
+  <rect width="1920" height="1080" fill="#7b6cff" opacity=".05"/>
+  <!-- bloom on the brightest edges -->
+  <g filter="url(#bloom)" opacity=".5">
+    <circle cx="1452" cy="300" r="120" fill="#ff8f6a"/>
+    <path d="M940,300 C1006,360 1016,460 1006,520" stroke="#ffd9b8" stroke-width="10" fill="none"/>
+  </g>
+</svg>
+<div class="grain"></div>
+<div class="vig"></div>
+</div>
+</body>
+</html>

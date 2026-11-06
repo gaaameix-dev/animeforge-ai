@@ -67,6 +67,8 @@ The full guide, with layer stacks, shading recipes and code patterns, is [`skill
 /animeforge-ai:draw a rain-soaked rooftop, a red moon opening, a blade catching the light — 4s, 16:9
 ```
 
+A worked example of that stage is in the repo: [`examples/rooftop-shot/`](examples/rooftop-shot/index.html) — one 1920×1080 frame, drawn in SVG, no image model anywhere in it. Construction pass, cel tones, rim light, one key vector, seeded grain. Open the file in a browser and it is the frame.
+
 ## Layout
 
 ```
@@ -76,6 +78,7 @@ skills/animeforge-ai/references/production-checklist.md   QA checklist
 .claude-plugin/                                     plugin + marketplace manifests
 commands/plan.md                                    /animeforge-ai:plan
 commands/draw.md                                    /animeforge-ai:draw
+examples/rooftop-shot/index.html                    one frame drawn in code (SVG)
 index.html                                          the page at the Pages URL
 ```
 
