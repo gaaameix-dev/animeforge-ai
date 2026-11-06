@@ -203,3 +203,60 @@ const FRAME = 1 / 24;
    brighter than both sides is a shade pass whose path drifted from the shape it shades.
 
 Report what passed. If a check fails and you shipped anyway, say which one and why.
+
+---
+
+## 9. Reference targets — the three frames people always point at
+
+Sooner or later someone shows you three pictures and says "make it like this": a neon night
+city with lanterns and fireworks, a moonlit old town with airships, and a hard-lit close-up
+of a face. They are worth studying, because they are built from a handful of moves, not from
+detail.
+
+What all three actually do:
+
+- **One light source, hard direction.** In the close-up the key is behind and to the right:
+  the shadow side is a *shape*, not a gradient. In the city frames the emissive lights are
+  the key and the sky is the fill.
+- **Warm against cool.** Every one of them splits the frame: warm lights (#ffc06a, #ff9a3c)
+  against a cold sky (#0a1322, #16283a). Never warm-on-warm.
+- **Depth by haze, not by detail.** Each plane back is lower contrast and slightly bluer.
+  The far city is barely more than bokeh dots; the near buildings carry the windows.
+- **Density of tiny emitters.** Hundreds of windows, lanterns, sparks, each 2–10px. This is
+  the one thing code does better than a brush — generate them, do not draw them.
+- **Bloom on the top 1% of brightness, grain on everything, vignette at the edges.** Those
+  three passes are most of the "expensive" feeling.
+
+### What code reproduces well
+
+| Move | How |
+| --- | --- |
+| City blocks | seeded generator: width, height, window grid, emissive rects, roof caps |
+| Depth planes | draw far → near; each back plane gets a blur filter and lower opacity |
+| Lantern strings | a quadratic bezier for the wire, evenly spaced circles along it, a blurred copy for glow |
+| Water | vertical light streaks under the lights + a few ripple strokes |
+| Fireworks | clusters of dots with bloom, never radial lines |
+| Hard face shadow | polygons clipped to the face, zero blur, warm-grey fill |
+| Rim light | one bright stroke on the lit silhouette + a blurred copy at 3× width |
+| Atmosphere | one haze rect per plane, 6–18% opacity, tinted to the key |
+
+```js
+// the shape of every environment generator
+const rnd = mulberry32(seed);
+for (const plane of planes) {          // far -> near
+  for (let x = -80; x < W + 80; x += w + gap) {
+    const h = lerp(plane.hMin, plane.hMax, rnd());
+    emitBuilding(x, plane.baseY - h, w, h, plane);
+    for (const win of windowGrid(w, h, rnd)) emitLight(win, plane.warm);
+  }
+  emitHaze(plane);                     // one rect, low opacity
+}
+```
+
+### What it does not reproduce
+
+The painterly finish: brush texture, colour that shifts inside a single shape, hair drawn as
+hundreds of individually weighted strokes. Code gets the *structure* of those frames — the
+light, the depth, the density — and stops short of the hand. Do not promise the hand. Say
+what you are approximating, and get the light and the density right, because that is what
+makes a frame read as anime at a glance.
