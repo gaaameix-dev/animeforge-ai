@@ -172,6 +172,25 @@ key. Bloom on the brightest 5% only. Grain at 2–4% over everything.
 
 ---
 
+## 6b. One scene, three setups
+
+Do not build a new scene per shot. Build **one master scene** and move a camera over it — a
+single transform, `translate(tx,ty) scale(s)`, driven from the timeline. Every shot stays
+consistent for free: same palette, same light, same geometry.
+
+```
+shot 1  wide     s 1.00 -> 1.07, centred on the frame      (a slow push, nothing else)
+shot 2  close    s 1.86 -> 2.00, centred on the subject    (a cut, then a drift)
+shot 3  title    hold shot 2, fade a flat card over it
+```
+
+Two rules that keep it from breaking:
+
+- Keep the camera centre inside the scene, or the empty margin shows as a black band.
+- Step every value on `frame = floor(t*24)`, never on raw milliseconds. Two runs must produce
+  the same frames, and stills must be reproducible — expose a `#t=5.2` freeze so a review can
+  grab any frame without a video export.
+
 ## 7. Code patterns that keep it sharp
 
 **Layer stack (SVG or divs), bottom to top:**

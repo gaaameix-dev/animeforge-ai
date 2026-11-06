@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>AnimeForge AI — three shots, one scene, 24fps</title>
+<style>
+  html,body{margin:0;background:#05050a;color:#e9e7f2;
+    font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+  .frame{position:relative;width:1920px;height:1080px;overflow:hidden;background:#08080f}
+  .cam{position:absolute;inset:0;transform-origin:0 0;will-change:transform}
+  .title{position:absolute;inset:0;display:grid;place-content:center;gap:18px;text-align:center;
+    background:#05050a;opacity:0}
+  .title h1{margin:0;font:700 128px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.18em;
+    color:#e8434b;text-transform:uppercase}
+  .title .rule{width:320px;height:3px;background:#e8434b;margin:0 auto;transform:scaleX(0)}
+  .title p{margin:0;font-size:20px;letter-spacing:.32em;color:#9a97b4;text-transform:uppercase}
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>")}
+  .vig{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(125% 100% at 40% 45%, transparent 42%, rgba(3,3,8,.75) 100%)}
+  .hud{position:absolute;left:24px;bottom:16px;font-size:12px;letter-spacing:.2em;color:#4a4560}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="cam" id="cam">
+<svg id="scene" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="frameClip"><rect width="1920" height="1080"/></clipPath>
+  </defs>
+  <g clip-path="url(#frameClip)">
+    <!-- flat sky bands -->
+    <rect width="1920" height="1080" fill="#12102a"/>
+    <rect y="430" width="1920" height="330" fill="#2c1b3a"/>
+    <rect y="700" width="1920" height="200" fill="#7a2b2f"/>
+    <rect y="880" width="1920" height="200" fill="#08080f"/>
+
+    <!-- moon -->
+    <circle cx="640" cy="400" r="300" fill="#e8434b"/>
+    <circle cx="640" cy="400" r="322" fill="none" stroke="#e8434b" stroke-width="3" opacity=".35"/>
+    <circle cx="640" cy="400" r="360" fill="none" stroke="#e8434b" stroke-width="2" opacity=".16"/>
+
+    <!-- city silhouette -->
+    <path id="city" fill="#08080f"/>
+
+    <!-- lantern string -->
+    <path d="M60,120 Q460,330 900,250" stroke="#08080f" stroke-width="3" fill="none"/>
+    <g id="lanterns"></g>
+
+    <!-- foreground roof -->
+    <path d="M0,1080 L0,790 L580,986 L1010,1080 Z" fill="#04040a"/>
+    <path d="M0,790 L580,986" stroke="#e8434b" stroke-width="3" opacity=".35" fill="none"/>
+
+    <!-- the figure -->
+    <g id="figure" fill="#08080f"></g>
+
+    <!-- rain, animated -->
+    <g id="rain" stroke="#e8434b" stroke-width="2"></g>
+
+    <!-- accent lantern on the roof -->
+    <circle cx="700" cy="980" r="26" fill="#ffcf8a" opacity=".18"/>
+    <circle cx="700" cy="980" r="12" fill="#ffcf8a"/>
+  </g>
+</svg>
+</div>
+  <div class="title" id="title">
+    <h1>Red Moon</h1>
+    <div class="rule" id="rule"></div>
+    <p>three shots · one scene · 24 fps</p>
+  </div>
+  <div class="grain"></div>
+  <div class="vig"></div>
+  <div class="hud" id="hud">SHOT 1/3</div>
+</div>
+<script>
+// ---------- deterministic build: geometry from a seeded rng ----------
+const mulberry32 = a => () => (a |= 0, a = a + 0x6D2B79F5 | 0,
+  ((Math.imul(a ^ a >>> 15, 1 | a) + (Math.imul(a ^ a >>> 15, 61 | a) ^ a)) >>> 0) / 4294967296);
+const rnd = mulberry32(5);
+
+// city silhouette
+let d = "M0,880", x = 0;
+while (x < 1920) { const w = 70 + rnd()*100, h = 40 + rnd()*110;
+  d += ` L${x|0},${(880-h)|0} L${(x+w)|0},${(880-h)|0} L${(x+w)|0},880`; x += w + rnd()*30; }
+d += " L1920,880 L1920,1080 L0,1080 Z";
+document.getElementById("city").setAttribute("d", d);
+
+// lanterns on the string
+const lan = document.getElementById("lanterns");
+for (let i = 0; i < 6; i++) {
+  const t = i/5, bx = (1-t)**2*60 + 2*(1-t)*t*460 + t*t*900,
+        by = (1-t)**2*120 + 2*(1-t)*t*330 + t*t*250;
+  lan.innerHTML += `<line x1="${bx}" y1="${by}" x2="${bx}" y2="${by+18}" stroke="#08080f" stroke-width="2"/>`
+                 + `<circle cx="${bx}" cy="${by+34}" r="16" fill="#ffcf8a"/>`;
+}
+
+// the figure
+const fx = 300, fy = 892;
+document.getElementById("figure").innerHTML = `
+  <circle cx="${fx}" cy="${fy-250}" r="42"/>
+  <path d="M${fx-42},${fy-278} C${fx-28},${fy-314} ${fx+30},${fy-312} ${fx+42},${fy-274} C${fx+16},${fy-290} ${fx-18},${fy-290} ${fx-42},${fy-278} Z"/>
+  <path d="M${fx-78},${fy} C${fx-76},${fy-146} ${fx-36},${fy-206} ${fx} ,${fy-212} C${fx+36},${fy-206} ${fx+76},${fy-146} ${fx+78},${fy} Z"/>
+`;
+document.getElementById("figure").innerHTML +=
+  `<path d="M${fx+42},${fy-282} C${fx+54},${fy-244} ${fx+52},${fy-212} ${fx+42},${fy-188}" stroke="#e8434b" stroke-width="5" fill="none" opacity=".85"/>`;
+
+// rain
+const rain = document.getElementById("rain");
+for (let i = 0; i < 110; i++) {
+  const rx = rnd()*2100, ry = rnd()*1200, ln = 26 + rnd()*34;
+  rain.innerHTML += `<line x1="${rx|0}" y1="${ry|0}" x2="${(rx-ln*.32)|0}" y2="${(ry+ln)|0}" opacity="${(.05+rnd()*.12).toFixed(2)}"/>`;
+}
+
+// ---------- the timeline: 24fps, three shots ----------
+const FPS = 24, TOTAL = 12;            // seconds
+const cam = document.getElementById("cam"), title = document.getElementById("title"),
+      rule = document.getElementById("rule"), hud = document.getElementById("hud");
+
+const ease = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
+const lerp = (a, b, t) => a + (b-a)*t;
+
+// camera keyframes: one scene, three setups
+function setup(t) {
+  if (t < 4) {                                    // SHOT 1 — wide, slow push
+    const u = ease(t/4);
+    return { s: lerp(1.00, 1.07, u), px: 960, py: 540, shot: 1 };
+  }
+  if (t < 8) {                                    // SHOT 2 — tight on the figure
+    const u = ease((t-4)/4);
+    return { s: lerp(1.86, 2.00, u), px: 540, py: 800, shot: 2 };
+  }
+  return { s: 2.00, px: 540, py: 800, shot: 3 };  // SHOT 3 — title over the held frame
+}
+
+function render(t) {
+  const f = Math.floor(t*FPS);                    // everything steps on frames, not on time
+  const tt = f/FPS;
+  const c = setup(tt);
+  cam.style.transform = `translate(${(960 - c.px*c.s).toFixed(2)}px, ${(540 - c.py*c.s).toFixed(2)}px) scale(${c.s.toFixed(4)})`;
+
+  // rain drifts, frame-locked
+  rain.setAttribute("transform", `translate(${(-(f*2.4)%60).toFixed(1)}, ${((f*7)%80).toFixed(1)})`);
+
+  // title
+  const tin = Math.max(0, Math.min(1, (tt-8.4)/0.8));
+  title.style.opacity = tin;
+  rule.style.transform = `scaleX(${Math.max(0, Math.min(1, (tt-9.0)/0.7)).toFixed(3)})`;
+
+  hud.textContent = `SHOT ${c.shot}/3 · ${String(f).padStart(3,"0")}f · ${tt.toFixed(2)}s`;
+}
+
+// freeze for a still: #t=5.2
+const freeze = (location.hash.match(/t=([\d.]+)/) || [])[1];
+if (freeze) { render(parseFloat(freeze)); }
+else {
+  const start = performance.now();
+  (function loop(){
+    render(((performance.now()-start)/1000) % TOTAL);
+    requestAnimationFrame(loop);
+  })();
+}
+</script>
+</body>
+</html>

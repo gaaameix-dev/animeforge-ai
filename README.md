@@ -73,6 +73,7 @@ Two worked examples of that stage are in the repo:
 - [`examples/rooftop-shot/`](examples/rooftop-shot/index.html) — a backlit close-up, hand-placed paths.
 - [`examples/city-night/`](examples/city-night/index.html) — a night city from a seeded generator: [`gen.py`](examples/city-night/gen.py) writes the SVG — 2,000 nodes, windows, lanterns, water, bloom.
 - [`examples/poster-frame/`](examples/poster-frame/index.html) — five colours, 121 shapes, a flat poster frame.
+- [`examples/three-shots/`](examples/three-shots/index.html) — one master scene, three camera setups and a title card on a 24fps timeline. Stills: [`stills.png`](examples/three-shots/stills.png).
 - [`examples/street-night/`](examples/street-night/index.html) — a lantern-lit alley in perspective, 4,400 nodes: converging facades, tiled eaves, lit windows, neon, stalls, overhead strings, wet street.
 
 Open either file in a browser and it is the frame; no image model anywhere in it.
