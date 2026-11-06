@@ -1,157 +1,64 @@
-<h1 align="center">html-anime</h1>
+<h1 align="center">AnimeForge AI</h1>
 
 <p align="center">
-  <b>Prompt an anime. Your coding agent draws it in code.</b>
+  <b>An anime showrunner, screenwriter, storyboard artist and animation director in one skill.</b>
 </p>
 
 <p align="center">
-  <a href="https://github.com/gaaameix-dev/html-anime/stargazers"><img src="https://img.shields.io/github/stars/gaaameix-dev/html-anime?style=flat-square&color=e8434b" alt="GitHub stars"></a>
-  <a href="https://gaaameix-dev.github.io/html-anime/"><img src="https://img.shields.io/badge/site-gaaameix-dev.github.io%2Fhtml--anime-111?style=flat-square" alt="Site"></a>
+  <a href="https://gaaameix-dev.github.io/animeforge-ai/"><img src="https://img.shields.io/badge/site-gaaameix--dev.github.io%2Fanimeforge--ai-111?style=flat-square" alt="Site"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111?style=flat-square" alt="MIT license"></a>
-  <img src="https://img.shields.io/badge/render-HyperFrames-111?style=flat-square" alt="HyperFrames">
-  <img src="https://img.shields.io/badge/agents-Claude%20%C2%B7%20Codex%20%C2%B7%20Cursor%20%C2%B7%20Grok-111?style=flat-square" alt="Claude, Codex, Cursor, Grok">
-  <a href="https://discord.gg/zEB4VjmfSb"><img src="https://img.shields.io/badge/Discord-Join%20the%20community-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
+  <img src="https://img.shields.io/badge/for-Claude%20Code-111?style=flat-square" alt="Claude Code">
 </p>
 
-<p align="center">
-  <a href="https://gaaameix-dev.github.io/html-anime/"><img src="media/city.jpg" width="860" alt="A moon over the night city, a still from Kokuyō"></a>
-</p>
+AnimeForge AI turns an idea, a prompt, a novel or a manga concept into a production-ready anime package: brief, story, timed script, character bibles, world and art direction, a shot-by-shot storyboard with ready-to-use prompts, animation and audio direction, an edit decision list, and a QA pass.
 
-<p align="center">
-  <sub>A still from <i>Kokuyō</i>, drawn entirely in HTML. <a href="https://gaaameix-dev.github.io/html-anime/">Watch it on the site</a> · <a href="https://github.com/gaaameix-dev/html-anime/releases/download/v0.1.0/film.mp4">film.mp4</a></sub>
-</p>
+It is a **skill**, not a renderer. It plans and directs; it never claims a frame, a voice track or an export exists unless a connected tool confirms it. With no generation tool attached it hands you production-ready prompts and assembly instructions instead.
 
-An anime, written as HTML. You write a scene. [The site](https://gaaameix-dev.github.io/html-anime/) turns it into a shot sheet: holds, one expensive shot, a closed color script. Paste that sheet into Claude, Codex, Cursor, or Grok. The agent draws the frames.
+## Install
 
-The pictures are HTML, timed for [HyperFrames](https://github.com/heygen-com/hyperframes). Nothing here calls a video model.
-
-## The film
-
-Kokuyō. Watch it on [the site](https://gaaameix-dev.github.io/html-anime/) or open [film.mp4](https://github.com/gaaameix-dev/html-anime/releases/download/v0.1.0/film.mp4).
-
-The film is 36 MB, so it ships as a [release asset](https://github.com/gaaameix-dev/html-anime/releases/download/v0.1.0/film.mp4) instead of in git. Download it into `media/` if you want the local page to play it.
-
-<table>
-  <tr>
-    <td width="50%"><img src="media/moon.jpg" alt="A cracked moon falling through rain"></td>
-    <td width="50%"><img src="media/fight.jpg" alt="Two figures crossing blades in front of the moon"></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="media/helm.jpg" alt="A dark helm with a red crescent"></td>
-    <td width="50%"><img src="media/ren.jpg" alt="A close-up washed in white light"></td>
-  </tr>
-</table>
-
-## Start
-
-> Forked from [blixvip/html-anime](https://github.com/blixvip/html-anime) (MIT). This copy is hosted at [gaaameix-dev/html-anime](https://github.com/gaaameix-dev/html-anime) and the site runs on GitHub Pages.
+Claude Code, from this repo as a plugin marketplace:
 
 ```
-git clone https://github.com/gaaameix-dev/html-anime.git
-cd html-anime
-```
-
-Open the folder in the agent you already use and paste a sheet as the first message. The site builds the sheet in the browser. `harness/compile.js` builds the same sheet in Node.
-
-Serve the site from this folder, then open the address it prints:
-
-```
-python -m http.server
-```
-
-Opening `index.html` as a file shows that same instruction. The sheet will not run until the folder is served.
-
-Or build a sheet in Node (no dependencies):
-
-```js
-import { compileBrief } from "./harness/compile.js";
-
-const sheet = compileBrief({
-  logline: "On a roof in the rain, a red moon opens and a line of light falls.",
-  seconds: 8,          // 8, 12, or 20
-  aspect: "16:9",      // or "9:16"
-  script: "indigo",    // indigo, eclipse, noon, or festival
-  dialogue: "The rain hid the sound of the blade.",
-});
-console.log(sheet.ok ? sheet.markdown : sheet.error);
-```
-
-| Agent | What it reads | Open |
-| --- | --- | --- |
-| Claude Code | `CLAUDE.md` | `claude` |
-| Codex | `AGENTS.md` | `codex` |
-| Cursor | `.cursor/rules/html-anime.mdc` | `cursor .` |
-| Grok | `AGENTS.md` | `grok` |
-
-## Install as a Claude Code plugin
-
-This repo is its own plugin marketplace, so Claude Code can install the five skills and the `/html-anime:sheet` command straight from it:
-
-```
-/plugin marketplace add gaaameix-dev/html-anime
-/plugin install html-anime@html-anime
+/plugin marketplace add gaaameix-dev/animeforge-ai
+/plugin install animeforge-ai@animeforge-ai
 ```
 
 Then, in any project:
 
 ```
-/html-anime:sheet On a roof in the rain, a red moon opens and a line of light falls.
+/animeforge-ai:plan a 30-second original Hindi anime trailer, night city, red moon
 ```
 
-The plugin carries `skills/`, `commands/sheet.md` and `harness/`. Cloning the repo instead works the same way — the skills are plain `SKILL.md` files.
+Claude.ai / other hosts: drop `skills/animeforge-ai/` into your skills folder, or upload the folder as a skill ZIP. The skill is one `SKILL.md` plus `references/production-checklist.md`.
 
-## What is in the repo
+## What it covers
 
-- `index.html` — the site
-- `skills/html-anime-direct/SKILL.md` — which shots exist
-- `skills/html-anime-cel/SKILL.md` — how a frame is painted
-- `skills/html-anime-timing/SKILL.md` — twos, holds, the smear
-- `skills/html-anime-camera/SKILL.md` — the cut and the frame
-- `skills/html-anime-render/SKILL.md` — the HyperFrames file
-- `harness/compile.js` — logline to sheet
-- `media/film.mp4` — Kokuyō, the film
-- `media/city.jpg`, `media/moon.jpg`, `media/fight.jpg`, `media/helm.jpg`, `media/ren.jpg` — stills from it
-- `films/roof/` — an 8 second reference. File shape and the color-dip cut, not a film to remix
-- `AGENTS.md` — the contract
+| Stage | Output |
+| --- | --- |
+| A — Brief | Title, logline, genre, tone, platform, runtime, language, aspect ratio |
+| B — Story | Premise, stakes, conflict, beats, ending or episode hook |
+| C — Script | Scene headings, action, dialogue, timings |
+| D — Characters | Character bible with identity anchors and reference-sheet needs |
+| E — World | Locations, lighting, color script, continuity rules |
+| F — Storyboard | Shot size, angle, movement, action, duration, prompt, negative prompt |
+| G — Animation | Blocking, timing, spacing, effects, 2D and 3D direction |
+| H — Audio | Voice profiles, dialogue script, ambience, SFX, music brief, mix notes |
+| I — Production | Uses only tools that actually exist, tracks job ids, verifies outputs |
+| J — Edit | Edit decision list, titles, subtitles, grade, export settings |
+| K — QA | Continuity, pacing, lip-sync, rights, aspect ratio — as a severity list |
 
-## Test
+Thirteen modes come with it: Idea, Story, Script, Character, Storyboard, 2D Anime, 3D Anime, Action, Voice & Audio, Trailer, Episode, Production, Revision.
 
-```
-npm test
-```
-
-Checks that every runtime sums exactly and has one sakuga shot, and that the sheet carries the size, frame count, and dialogue.
-
-## Render the reference
+## Layout
 
 ```
-cd films/roof
-npx hyperframes preview
+skills/animeforge-ai/SKILL.md                       the skill
+skills/animeforge-ai/references/production-checklist.md   QA checklist
+.claude-plugin/                                     plugin + marketplace manifests
+commands/plan.md                                    /animeforge-ai:plan
+index.html                                          the page at the Pages URL
 ```
-
-Lint before you trust a new film:
-
-```
-npx hyperframes lint
-npx hyperframes validate
-```
-
-## Sheet rules the agent is not allowed to break
-
-- Shot times sum to 8, 12, or 20 seconds
-- One sakuga shot. The others stay on three drawings
-- Acting on twos. Rain and a blade on ones
-- Only the hexes printed on the sheet
-- The line you wrote, verbatim, or no dialogue at all
-
-## Community
-
-💬 [Join the Discord](https://discord.gg/zEB4VjmfSb) for questions, help, feedback, and updates.
-
-## Credits
-
-Original project: [blixvip/html-anime](https://github.com/blixvip/html-anime), MIT licensed. The film *Kokuyō*, the skills and the HyperFrames harness are theirs; this fork adds the Claude Code plugin, the `/html-anime:sheet` command and the GitHub Pages deploy.
 
 ## License
 
-[MIT](LICENSE). The reference film's font keeps its own license: see [films/roof/fonts/NOTICE.txt](films/roof/fonts/NOTICE.txt).
+MIT. See [LICENSE](LICENSE).

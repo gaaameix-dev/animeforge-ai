@@ -1,21 +1,21 @@
 {
-  "name": "html-anime",
+  "name": "animeforge-ai",
   "owner": {
     "name": "gaaameix-dev",
     "url": "https://github.com/gaaameix-dev"
   },
   "metadata": {
-    "description": "Draw anime in HTML — shot sheets, cels, timing, camera and render, for Claude Code.",
-    "version": "0.1.0"
+    "description": "AnimeForge AI — plan and direct an anime from logline to edit decision list, in Claude Code.",
+    "version": "1.0.0"
   },
   "plugins": [
     {
-      "name": "html-anime",
+      "name": "animeforge-ai",
       "source": "./",
-      "description": "Prompt an anime. Claude draws it in HTML, timed for HyperFrames. Five skills: direct, cel, timing, camera, render.",
-      "version": "0.1.0",
+      "description": "An end-to-end anime production director: brief, story, script, character bibles, storyboards, animation and audio direction, editing and QA.",
+      "version": "1.0.0",
       "category": "creative",
-      "keywords": ["anime", "animation", "html", "hyperframes", "film"],
+      "keywords": ["anime", "storyboard", "production", "screenplay"],
       "author": {
         "name": "gaaameix-dev",
         "url": "https://github.com/gaaameix-dev"
