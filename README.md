@@ -72,6 +72,7 @@ Two worked examples of that stage are in the repo:
 
 - [`examples/rooftop-shot/`](examples/rooftop-shot/index.html) — a backlit close-up, hand-placed paths.
 - [`examples/city-night/`](examples/city-night/index.html) — a night city from a seeded generator: [`gen.py`](examples/city-night/gen.py) writes the SVG — 2,000 nodes, windows, lanterns, water, bloom.
+- [`examples/poster-frame/`](examples/poster-frame/index.html) — five colours, 121 shapes, a flat poster frame.
 - [`examples/street-night/`](examples/street-night/index.html) — a lantern-lit alley in perspective, 4,400 nodes: converging facades, tiled eaves, lit windows, neon, stalls, overhead strings, wet street.
 
 Open either file in a browser and it is the frame; no image model anywhere in it.
@@ -79,7 +80,10 @@ Open either file in a browser and it is the frame; no image model anywhere in it
 ## Two ways to make a frame, and which one to promise
 
 **Stage L, code-drawn.** You write the frame. Full control, deterministic, no model needed. The
-ceiling is clean cel-shaded vector art — see `examples/`. It will not look painted.
+ceiling is graphic poster work — flat fills, 5–8 hexes, silhouette first. See
+[`examples/poster-frame/`](examples/poster-frame/index.html), which is five colours and 121
+shapes. It will not look painted, and the skill now says so up front instead of letting you
+find out after six passes.
 
 **Stage M, hybrid.** Code plans the blocking, camera, palette and light; a connected image tool
 paints each shot; code times and assembles. This is the only route to painted key-visual

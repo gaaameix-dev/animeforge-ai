@@ -159,7 +159,13 @@ Return a concise issue list with severity and recommended fixes.
 
 When the frames are built by writing code — HTML, CSS, SVG, Canvas, WebGL, or a
 frame-timeline engine — you are the illustrator, not just the planner. Read
-`references/code-rendering.md` and hold to it. The short version:
+`references/code-rendering.md` and hold to it.
+
+Set the expectation first: **code-drawn frames are graphic, not painted.** Flat fills, a
+palette of 5–8 hexes, silhouette over surface, poster composition. If the brief asks for
+painted key-visual quality, that is Stage M, not this one — say so before you start.
+
+The short version:
 
 - **One light rig for the whole film.** Key direction, colour temperature and contrast
   ratio are decided in the brief and never break between shots.

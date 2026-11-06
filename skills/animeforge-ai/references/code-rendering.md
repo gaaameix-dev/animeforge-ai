@@ -14,6 +14,28 @@ Two rules sit above everything else:
 
 ---
 
+## 0. Decide what code is actually good at
+
+Code-only output is **graphic**, not painted. Stop reaching for painterly finish — it does not
+come, and every pass spent on it makes the frame busier rather than better. What code does
+better than a brush:
+
+- flat fills with a hard edge
+- silhouettes and negative space
+- a palette of 5–8 hexes used at full strength
+- repetition: windows, lanterns, rain, tiles — hundreds of them, all identical
+- exact geometry: perfect circles, true diagonals, equal spacing
+- poster composition: one big shape, one accent, one line of tension
+
+What it does badly, every time: soft gradients inside a shape, painterly texture, hair as
+strokes, and detail that reads as detail rather than noise.
+
+So aim at **poster clarity**: one dominant shape, a limited palette, a strong diagonal, and
+nothing else. A clean graphic frame looks deliberate. A busy approximation of a painted frame
+looks broken.
+
+---
+
 ## 1. Build the character before you style it
 
 Work in this order, and do not skip to colour:
