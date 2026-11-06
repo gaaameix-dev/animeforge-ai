@@ -247,6 +247,32 @@ Report what passed. If a check fails and you shipped anyway, say which one and w
 
 ---
 
+## 8b. From HTML to an MP4
+
+A browser is the renderer; you only need a frame-grabber and an encoder.
+
+1. **Expose the timeline.** `window.__render = render` and accept `#capture` so the page holds
+   frame 0 instead of starting its own loop.
+2. **Grab frames** with Playwright driving the *system* headless shell (the bundled one may
+   crash on a minimal image):
+
+```python
+b = await pw.chromium.launch(executable_path="/usr/local/bin/chromium-headless-shell",
+                             args=["--no-sandbox", "--disable-gpu"])
+pg = await b.new_page(viewport={"width": 1920, "height": 1080})
+await pg.goto("file:///…/index.html#capture")
+for i in range(24 * 12):
+    await pg.evaluate(f"window.__render({i/24})")
+    await pg.screenshot(path=f"frames/f{i:04d}.png")   # skip if it exists — resumable
+```
+
+3. **Encode**: `ffmpeg -framerate 24 -i frames/f%04d.png -c:v libx264 -pix_fmt yuv420p -crf 18 -movflags +faststart out.mp4`.
+   `imageio-ffmpeg` ships a static binary if the image has no ffmpeg.
+
+Two practical notes: a 1080p screenshot costs 1–2s per frame, so ~300 frames does not fit in a
+single 5-minute call — make the loop resumable and run it twice. And `-pix_fmt yuv420p` is not
+optional if the file has to play anywhere.
+
 ## 9. Reference targets — the three frames people always point at
 
 Sooner or later someone shows you three pictures and says "make it like this": a neon night

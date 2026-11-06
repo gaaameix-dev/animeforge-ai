@@ -149,9 +149,13 @@ function render(t) {
   hud.textContent = `SHOT ${c.shot}/3 · ${String(f).padStart(3,"0")}f · ${tt.toFixed(2)}s`;
 }
 
-// freeze for a still: #t=5.2
+// expose the timeline for capture, and for stills
+window.__render = render;
+window.__fps = FPS;
+window.__total = TOTAL;
 const freeze = (location.hash.match(/t=([\d.]+)/) || [])[1];
 if (freeze) { render(parseFloat(freeze)); }
+else if (location.hash.includes("capture")) { render(0); }
 else {
   const start = performance.now();
   (function loop(){
