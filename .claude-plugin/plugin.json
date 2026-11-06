@@ -1,7 +1,7 @@
 {
   "name": "animeforge-ai",
-  "version": "1.0.0",
-  "description": "AnimeForge AI — an end-to-end anime production director skill: concept, story, script, characters, storyboard, animation, audio, edit and QA.",
+  "version": "1.1.0",
+  "description": "AnimeForge AI \u2014 an end-to-end anime production director: concept, story, script, characters, storyboard, animation, audio, edit, QA \u2014 and code-drawn frames that look hand-drawn.",
   "author": {
     "name": "gaaameix-dev",
     "url": "https://github.com/gaaameix-dev"
@@ -9,6 +9,13 @@
   "homepage": "https://gaaameix-dev.github.io/animeforge-ai/",
   "repository": "https://github.com/gaaameix-dev/animeforge-ai",
   "license": "MIT",
-  "keywords": ["anime", "storyboard", "screenplay", "production", "skill", "claude"],
+  "keywords": [
+    "anime",
+    "storyboard",
+    "screenplay",
+    "production",
+    "skill",
+    "claude"
+  ],
   "skills": "./skills/"
 }

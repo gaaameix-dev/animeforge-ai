@@ -5,21 +5,27 @@
     "url": "https://github.com/gaaameix-dev"
   },
   "metadata": {
-    "description": "AnimeForge AI — plan and direct an anime from logline to edit decision list, in Claude Code.",
-    "version": "1.0.0"
+    "description": "AnimeForge AI \u2014 plan and direct an anime from logline to edit decision list, in Claude Code.",
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "animeforge-ai",
       "source": "./",
       "description": "An end-to-end anime production director: brief, story, script, character bibles, storyboards, animation and audio direction, editing and QA.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "creative",
-      "keywords": ["anime", "storyboard", "production", "screenplay"],
+      "keywords": [
+        "anime",
+        "storyboard",
+        "production",
+        "screenplay"
+      ],
       "author": {
         "name": "gaaameix-dev",
         "url": "https://github.com/gaaameix-dev"
       }
     }
-  ]
+  ],
+  "version": "1.1.0"
 }
